@@ -245,6 +245,9 @@
        </tr>
 
       <?php
+
+      $obj = $result->fetch_object();
+
           //RECORRER OBJETOS DE LA CONSULTA
           while($obj = $result->fetch_object()) {
               //PINTAR CADA FILA
@@ -280,7 +283,7 @@
 
     if(isset($_GET["coduser"])){
         $cod_user=$_GET["coduser"];
- $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+ $connection2 = new mysqli($db_host, $db_user, $db_password, $db_name);
 
        if ($connection2->connect_errno) {
           printf("Conexión fallida %s\n", $mysqli->connect_error);
@@ -321,7 +324,7 @@
           while($obj2 = $result2->fetch_object()) {
               //PINTAR CADA FILA
               echo "<tr>";
-
+              var_dump($obj2->USER);
               echo "<td>".$obj2->USERNAME."</td>";
               echo "<td>".$obj2->ROL."</td>";
               echo "<td>".$obj2->ESTADO."</td>";

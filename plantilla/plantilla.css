@@ -1,6 +1,6 @@
 div{
-    /*border: solid red 1px;*/    
-    
+    /*border: solid red 1px;*/
+
 }
 
 body{
@@ -12,9 +12,9 @@ body{
     width: 100%;
     height: 70px;
     background-image: url(../images/top.png);
-    
-   
-    
+
+
+
 
 }
 
@@ -25,8 +25,8 @@ body{
     min-height: 100%;
     background-image: url(../images/backgroundtext.png);
     border-bottom: solid grey 2px;
-    
-    
+
+
 }
 
 #foot{
@@ -40,15 +40,15 @@ body{
     float: left;
     width: auto;
     height: auto;
-    
+
 
 }
 
 #logo img{
-    
+
     width: 65px;
     height: 65px;
-    margin-left: 100px;        
+    margin-left: 100px;
 
 }
 
@@ -78,7 +78,7 @@ body{
 
 /*--Una vez logueado--*/
 #login-dp2{
-    min-width: 130px;  
+    min-width: 130px;
     overflow:hidden;
     background-color:#FFBF00;
     margin-left: -41px;
@@ -94,7 +94,7 @@ body{
     font-weight: bold;
     font-size: 12px;
     width: 130px;
-    
+
 }
 #login-dp2 a:hover{
     background-color: #F7D358;
@@ -106,8 +106,8 @@ body{
 }
 #login-dp2 #uno{
     margin-top: -5px;
-    
-    
+
+
 }
 
 #login-dp2 #dos{
@@ -117,7 +117,7 @@ body{
 
 /*--------------------*/
 #login-dp .help-block{
-    font-size:12px    
+    font-size:12px
 }
 
 #ent{
@@ -134,12 +134,12 @@ body{
 
 #ent:hover{
     background-color: #F7D358;
-    
+
 }
 
 #ent a{
     margin-left: -15px;
-    text-decoration:none; 
+    text-decoration:none;
     color: #1C1C1C;
 }
 
@@ -174,7 +174,7 @@ body{
 /*----------------------Boton Registro---------------------------*/
 
 #reg{
-    margin: 20px 20px 10px 10px;    
+    margin: 20px 20px 10px 10px;
     float:left;
     width: 150px;
     height: 30px;
@@ -188,11 +188,11 @@ body{
 
 
 #reg span {
-    color:black; 
-    font-size:14px; 
+    color:black;
+    font-size:14px;
     padding:7px 29px 9px 30px;
     line-height: 16px;
-    
+
     display:block
 }
 #reg a{text-decoration: none}
@@ -208,8 +208,8 @@ body{
     float: left;
     width: 20px;
     height: 20px;
-    
-    
+
+
 }
 
 
@@ -220,8 +220,8 @@ body{
     width: 100px;
     height: auto;
     margin-top: -5px;
-    
-    
+
+
 }
 
 .rotateinfinite{
@@ -253,7 +253,7 @@ body{
     margin: 10px 30px 0 0;
     width: 50%;
     height:50%;
-    
+
 
 }
 
@@ -280,12 +280,12 @@ body{
 .btn-group .form-horizontal .btn[type="submit"] {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
-    
+
 }
 .form-horizontal .form-group {
     margin-left: 0;
     margin-right: 0;
-    
+
 }
 .form-group .form-control:last-child {
     border-top-left-radius: 2px;
@@ -305,27 +305,27 @@ body{
         margin-left: 50px;
     }
 }
- 
+
 
 /*--------------------------------------------Top Menú--------------------------------------------------*/
 
 #top_menu{
-	
+
 	width:auto;
 	height:40px;
     background-image: url(../images/top.png);
-    
-  
-    
+
+
+
 }
 
 #top_menu ul{
 	list-style: none;
     margin: 0 0 0 100px;
     height: 40px;
-    
-    
-    
+
+
+
 }
 
 #top_menu ul li{
@@ -343,7 +343,7 @@ body{
 #top_menu div.contenedor_general{
 	width:200px;
 	height:80px;
-	
+
 	-webkit-transition:margin-top .4s;
 }
 
@@ -403,9 +403,9 @@ body{
 	width:auto;
 	height:50px;
     background-image: url(../images/top.png);
-    
-  
-    
+
+
+
 }
 
 #top_menu2 ul{
@@ -414,11 +414,11 @@ body{
 	list-style: none;
     margin:0;
     width:90%;
-   
+
     height: 50px;
-    
-    
-    
+
+
+
 }
 
 #top_menu2 ul li{
@@ -436,7 +436,7 @@ body{
 #top_menu2 .contenedor_general{
 	width:200px;
 	height:100px;
-	
+
 	-webkit-transition:margin-top .4s;
 }
 
@@ -491,112 +491,6 @@ body{
     -webkit-filter: invert(100%);
     filter: invert(100%);
 }
-/*------------------Al contraerse----------------*/       
-@media (max-width: 1358px) {
-    .navbar-header {
-        height: 50px;
-        float: none;
-    }
-    .navbar-left,.navbar-right {
-        float: none !important;
-    }
-    .navbar-toggle {
-        display: block;
-        
-    }
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-    .navbar-fixed-top {
-        top: 0;
-        border-width: 0 0 1px;
-    }
-    .navbar-collapse.collapse {
-        display: none!important;
-    }
-    .navbar-nav {
-        float: none!important;
-        margin-top: 7.5px;
-    }
-    .navbar-nav>li {
-        float: none;
-    }
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .collapse.in{
-        display:block !important;
-    }
-    
-    #top_menu2{
-    border: solid black 1px;
-    border-radius: 0px;
-	margin: 0;
-	width:auto;
-	height:50px;
-    background-image: url(../images/top.png);
-    
-  
-    
-}
-
-#top_menu2 ul{
-    position: relative;
-    left:-9%;
-	list-style: none;
-    margin:0;
-    width: 1500px;
-   
-    height: 50px;
-    
-    
-    
-}
-    
-    #top_menu2 ul li{
-      
-	right: -3%;
-    position:relative;    
-	width:110%;
-	height:49px;
-	overflow: hidden;
-	margin:0px;
-    }
-    
-    #top_menu2 .contenedor_general{
-	width:100%;
-	height:100px;
-	
-	-webkit-transition:margin-top .4s;
-    }
-
-#top_menu2 .contenedor_uno{
-    padding-top:6px;
-	width:100%;
-	height:50px;
-	background-image: url(../images/top.png);
-	overflow: hidden;
-	border-bottom:4px solid #00BFFF;
-    }
-
-#top_menu2 .contenedor_dos{
-	width:100%;
-	height:40px;
-	background-color: #00BFFF;
-	overflow: hidden;
-	border-bottom:4px solid black;
-    }
-    
-#top_menu2 #excep{
-   font-size: 14px;
-    }
-#top_menu2 #excep2{
-   font-size: 14px;
-    }
-}       
- 
 /*----------------------------Footer-----------------------------*/
 
 .efooter{
@@ -617,7 +511,7 @@ body{
     font-size: 18px;
     color:#D8D8D8;
     font-family: calibri;
-  
+
 }
 
 #copy{
@@ -629,7 +523,7 @@ body{
     width: 150px;
     height: 20px;
     margin-left: 10px;
-    
+
 
 }
 
@@ -637,20 +531,20 @@ body{
 #fcenter{
     margin: 25px 10px 10px 60px;
     width: 15%;
-    
-    
+
+
 }
 #fcenter div{
-    
+
     border-bottom: solid #585858 1px;
-    
+
 }
 
 #fcenter a{
     text-decoration: none;
     color: grey;
-  
-    
+
+
 }
 
 #fcenter p {
@@ -659,7 +553,7 @@ body{
     font-weight: bold;
     margin-bottom: 15px;
     margin-top: 10px;
-    
+
 
 }
 
@@ -672,9 +566,9 @@ body{
     filter: alpha(opacity=65);
     opacity: 0.65;
     border-radius: 2px;
-    
-    
-  
+
+
+
 }
 #fcenter a:hover{
     color: white;
@@ -692,25 +586,25 @@ body{
     display: none;
     margin-left: 80px;
     float: left;
-    
-    
+
+
 }
 
 #pos{
     cursor: pointer;
-    
+
 }
 
 
 #pos p:hover{
     color: cadetblue;
-    
+
 }
 
 #pos img:hover{
     filter: alpha(opacity=65);
     opacity: 0.65;
-    
+
 }
 
 
@@ -719,7 +613,7 @@ body{
     font-family: helvetica;
     color:beige;
     line-height: 32px;
-    
+
 }
 
 #fder img{
@@ -731,8 +625,8 @@ body{
     clear: left;
     -webkit-filter: invert(100%);
     filter: invert(100%);
-    
-    
+
+
 }
 
 /*-----------------------------------------Botón Ir Arriba---------------------------------------*/
@@ -747,6 +641,5 @@ body{
 .ir-arriba img{
     width: 50px;
     height: 50px;
-    
-}
 
+}

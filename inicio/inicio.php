@@ -49,7 +49,7 @@
       //MAKING A SELECT QUERY
       /* Consultas de selección que devuelven un conjunto de resultados */
 
-        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."') and estado='activo';";
+        $consulta="SELECT * FROM USUARIO where USERNAME='".$userlogin."'and PASSWORD=md5('".$passlogin."') and ESTADO='activo';";
 
       if ($result = $connection->query($consulta)) {
           if($result->num_rows===0){
