@@ -240,7 +240,7 @@
            <td>NOMBRE</td>
            <td>EMAIL</td>
            <td colspan="3">OPERACIONES</td>
-//
+
 
        </tr>
 
