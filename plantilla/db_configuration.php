@@ -9,7 +9,7 @@
     $db_user="root"; //my db user
     $db_host="localhost"; //my db host
     $db_password="1234"; //my db password ORIGINAL
-    $db_name="tiendamusica"; //my db name
+    $db_name="tienda_musica"; //my db name
   }
 
 ?>
