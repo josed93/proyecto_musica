@@ -6,9 +6,9 @@
     $db_password=$_ENV['OPENSHIFT_MYSQL_DB_PASSWORD']; //Openshift db password OPENSHIFT_MYSQL_DB_PASSWORD
     $db_name="tienda_musica"; //Openshift db name
   } else {
-    $db_user="root"; //my db user
+    $db_user=""; //my db user
     $db_host="localhost"; //my db host
-    $db_password="1234"; //my db password ORIGINAL
+    $db_password=""; //my db password ORIGINAL
     $db_name="tienda_musica"; //my db name
   }
 
