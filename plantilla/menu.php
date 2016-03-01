@@ -31,40 +31,7 @@
 
                     </div></a>
 			</li>
-			<li>
-				<a href="../catalogo/catalogo.php"><div class="contenedor_general">
-
-					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/catalogo_black.PNG">CATÁLOGO</p>
-					</div>
-
-					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/catalogo_black.PNG">CATÁLOGO</p>
-					</div>
-
-                    </div></a>
-			</li>
-			<?php
-			if(isset($_SESSION["user"])){
-				echo '<li>
-					<a href="../tienda/ver_pedidos.php"><div class="contenedor_general">
-
-						<div class="contenedor_uno">
-							<p class="texto_uno"><img src="../images/iconos_menu/catalogo_black.PNG">PEDIDOS</p>
-						</div>
-
-						<div class="contenedor_dos">
-	                        <p class="texto_dos"><img src="../images/iconos_menu/catalogo_black.PNG">PEDIDOS</p>
-						</div>
-
-	                    </div></a>
-				</li>';
-
-
-			}
-				?>
-
-
+			
 
 
 

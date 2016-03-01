@@ -134,30 +134,36 @@
     if(isset($_SESSION["user"])){
     ?>
 
-        <div>
-          <ul id="ent" class="navbar-left">
-            <li class="dropdown">
-              <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $_SESSION["user"]?></b> <span class="caret"></span></a>
-                <ul id="login-dp2" class="dropdown-menu" style="width:100px;">
-                    <li>
-                         <div class="row">
-                                <div class="collapse navbar-collapse">
-                                    <ul class="nav navbar-nav">
-                                        <li id="uno"><a href="../perfil/perfil.php"><span class="glyphicon glyphicon-user"></span>Ver perfil</a></li>
-                                        <li id="dos"><a href="../plantilla/logout.php"><span class="glyphicon glyphicon-log-in"></span>Cerrar sesión</a></li>
+    <div>
+      <ul id="ent" class="navbar-left">
+        <li class="dropdown">
+          <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $_SESSION["user"]?></b> <span class="caret"></span></a>
+            <ul id="login-dp2" class="dropdown-menu" style="width:100px;">
+                <li>
+                     <div class="row">
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li id="uno"><a href="../perfil/perfil.php"><span class="glyphicon glyphicon-user"></span>Ver perfil</a></li>
+                                    <?php
 
-                                    </ul>
+                                    if($_SESSION["rol"] == "user"){
+                                        echo '<li id="uno"><a href="../tienda/ver_pedidos.php"><span class="glyphicon glyphicon-eye-open"></span>Ver pedidos</a></li>';
+                                    }
+                                    ?>
+                                    <li id="dos"><a href="../plantilla/logout.php"><span class="glyphicon glyphicon-log-in"></span>Cerrar sesión</a></li>
+
+                                </ul>
 
 
 
-                                </div>
+                            </div>
 
-                         </div>
-                    </li>
-                </ul>
-            </li>
-          </ul>
-        </div>
+                     </div>
+                </li>
+            </ul>
+        </li>
+      </ul>
+    </div>
 
 
 
@@ -212,16 +218,6 @@
 
 
 ?>
-
-
-
-
-        <div id="carrito" class="rotateinfinite">
-                <a href="#"><img src="../images/carrito.PNG"></a>
-
-        </div>
-
-
 
 
 

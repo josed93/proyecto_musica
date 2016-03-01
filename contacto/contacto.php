@@ -144,36 +144,76 @@
     <?php
 
     if(isset($_SESSION["user"])){
+
+
+
     ?>
 
-        <div>
-          <ul id="ent" class="navbar-left">
-            <li class="dropdown">
-              <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $_SESSION["user"]?></b> <span class="caret"></span></a>
-                <ul id="login-dp2" class="dropdown-menu" style="width:100px;">
-                    <li>
-                         <div class="row">
-                                <div class="collapse navbar-collapse">
-                                    <ul class="nav navbar-nav">
-                                        <li id="uno"><a href="../perfil/perfil.php"><span class="glyphicon glyphicon-user"></span>Ver perfil</a></li>
-                                        <li id="dos"><a href="../plantilla/logout.php"><span class="glyphicon glyphicon-log-in"></span>Cerrar sesión</a></li>
+    <div>
+      <ul id="ent" class="navbar-left">
+        <li class="dropdown">
+          <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $_SESSION["user"]?></b> <span class="caret"></span></a>
+            <ul id="login-dp2" class="dropdown-menu" style="width:100px;">
+                <li>
+                     <div class="row">
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li id="uno"><a href="../perfil/perfil.php"><span class="glyphicon glyphicon-user"></span>Ver perfil</a></li>
+                                    <?php
 
-                                    </ul>
+                                    if($_SESSION["rol"] == "user"){
+                                        echo '<li id="uno"><a href="../tienda/ver_pedidos.php"><span class="glyphicon glyphicon-eye-open"></span>Ver pedidos</a></li>';
+                                    }
+                                    ?>
+                                    <li id="dos"><a href="../plantilla/logout.php"><span class="glyphicon glyphicon-log-in"></span>Cerrar sesión</a></li>
+
+                                </ul>
 
 
 
-                                </div>
+                            </div>
 
-                         </div>
-                    </li>
-                </ul>
-            </li>
-          </ul>
-        </div>
+                     </div>
+                </li>
+            </ul>
+        </li>
+      </ul>
+    </div>
+        <?php
+        if($_SESSION["rol"] == "user"){
+
+
+        ?>
+        <div id="carrito" class="rotateinfinite">
+                        <a href="../tienda/cesta.php"><img src="../images/carrito.PNG" style="float:left;width:40px;height:40px"/><p style="position:relative;float:left;top:20px;left:-23px;">
+                          <?php
+                          //CREATING THE CONNECTION
+                           $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+                            //TESTING IF THE CONNECTION WAS RIGHT
+                            if ($connection->connect_errno) {
+                                printf("Conexión fallida %s\n", $mysqli->connect_error);
+                                exit();
+                            }
+                          $user=$_SESSION["user"];
+                          $consulta = "SELECT SUM(CESTA.CANTIDAD) AS total FROM USUARIO, CESTA WHERE USUARIO.COD_USU = CESTA.COD_USU AND USUARIO.USERNAME = '".$user."';";
+                          if($result = $connection->query($consulta)){
+                                $total=0;
+                                if($result->num_rows==0){
+                                }else{
+                                    while($fila=$result->fetch_object()){
+                                        $total=$total+$fila->total;
+                                    }
+                                }
+                                echo " ($total)";
+                          }
+                          ?>
+                        </p></a>
+                </div>
 
 
 
     <?php
+      }
     }
     else{
     ?>
@@ -224,14 +264,6 @@
 
 
 ?>
-
-
-
-
-        <div id="carrito" class="rotateinfinite">
-                <a href="#"><img src="../images/carrito.PNG"></a>
-
-        </div>
 
 
 

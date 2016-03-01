@@ -24,6 +24,12 @@
 
 
 <body>
+  <style>
+
+
+
+  </style>
+
 
 
 
@@ -140,55 +146,61 @@
     if(isset($_SESSION["user"])){
     ?>
 
-        <div>
-          <ul id="ent" class="navbar-left">
-            <li class="dropdown">
-              <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $_SESSION["user"]?></b> <span class="caret"></span></a>
-                <ul id="login-dp2" class="dropdown-menu" style="width:100px;">
-                    <li>
-                         <div class="row">
-                                <div class="collapse navbar-collapse">
-                                    <ul class="nav navbar-nav">
-                                        <li id="uno"><a href="../perfil/perfil.php"><span class="glyphicon glyphicon-user"></span>Ver perfil</a></li>
-                                        <li id="dos"><a href="../plantilla/logout.php"><span class="glyphicon glyphicon-log-in"></span>Cerrar sesión</a></li>
+    <div>
+      <ul id="ent" class="navbar-left">
+        <li class="dropdown">
+          <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $_SESSION["user"]?></b> <span class="caret"></span></a>
+            <ul id="login-dp2" class="dropdown-menu" style="width:100px;">
+                <li>
+                     <div class="row">
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li id="uno"><a href="../perfil/perfil.php"><span class="glyphicon glyphicon-user"></span>Ver perfil</a></li>
+                                    <?php
 
-                                    </ul>
-
-
-
-                                </div>
-
-                         </div>
-                    </li>
-                </ul>
-            </li>
-          </ul>
-        </div>
-        <div id="carrito" class="rotateinfinite">
-                        <a href="#"><img src="../images/carrito.PNG" style="float:left;width:40px;height:40px"/><p style="position:relative;float:left;top:20px;left:-23px;">
-                          <?php
-                          //CREATING THE CONNECTION
-                           $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
-                            //TESTING IF THE CONNECTION WAS RIGHT
-                            if ($connection->connect_errno) {
-                                printf("Conexión fallida %s\n", $mysqli->connect_error);
-                                exit();
-                            }
-                          $user=$_SESSION["user"];
-                          $consulta = "SELECT SUM(CESTA.CANTIDAD) AS total FROM USUARIO, CESTA WHERE USUARIO.COD_USU = CESTA.COD_USU AND USUARIO.USERNAME = '".$user."';";
-                          if($result = $connection->query($consulta)){
-                                $total=0;
-                                if($result->num_rows==0){
-                                }else{
-                                    while($fila=$result->fetch_object()){
-                                        $total=$total+$fila->total;
+                                    if($_SESSION["rol"] == "user"){
+                                        echo '<li id="uno"><a href="../tienda/ver_pedidos.php"><span class="glyphicon glyphicon-eye-open"></span>Ver pedidos</a></li>';
                                     }
+                                    ?>
+                                    <li id="dos"><a href="../plantilla/logout.php"><span class="glyphicon glyphicon-log-in"></span>Cerrar sesión</a></li>
+
+                                </ul>
+
+
+
+                            </div>
+
+                     </div>
+                </li>
+            </ul>
+        </li>
+      </ul>
+    </div>
+    <div id="carrito" class="rotateinfinite">
+                    <a href="../tienda/cesta.php"><img src="../images/carrito.PNG" style="float:left;width:40px;height:40px"/><p style="position:relative;float:left;top:20px;left:-23px;">
+                      <?php
+                      //CREATING THE CONNECTION
+                       $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+                        //TESTING IF THE CONNECTION WAS RIGHT
+                        if ($connection->connect_errno) {
+                            printf("Conexión fallida %s\n", $mysqli->connect_error);
+                            exit();
+                        }
+                      $user=$_SESSION["user"];
+                      $consulta = "SELECT SUM(CESTA.CANTIDAD) AS total FROM USUARIO, CESTA WHERE USUARIO.COD_USU = CESTA.COD_USU AND USUARIO.USERNAME = '".$user."';";
+                      if($result = $connection->query($consulta)){
+                            $total=0;
+                            if($result->num_rows==0){
+                            }else{
+                                while($fila=$result->fetch_object()){
+                                    $total=$total+$fila->total;
                                 }
-                                echo " ($total)";
-                          }
-                          ?>
-                        </p></a>
-                </div>
+                            }
+                            echo " ($total)";
+                      }
+                      ?>
+                    </p></a>
+            </div>
 
 
     <?php
@@ -254,11 +266,17 @@
         <?php include("../plantilla/alerts.php");?>
 
     <div id="center" class="container">
-      <div class="" style="position:relative;width:80%;height:40px;border:solid black 1px;top:30px;margin:0 auto;">
-        <h2 style="position:relative;font-family:sans-serif;top:-10px">DETALLES DEL PRODUCTO</h2>
-      </div>
-      <div class="" style="position:relative;width:80%;height:300px;top:40px;margin:0 auto;">
-          <div class="" style="float:left;border:solid black 1px;width:40%;height:100%;">
+      <div class="nav nav-tabs well well-sm " style="text-align:center;">
+
+      <div class="row">
+<h5 style="font-weight:bold;color:ORANGE;float:left;" class="col-md-offset-5">DETALLES DEL DISCO</h5>
+<div class="col-md-offset-9" style="margin-right:1%">
+
+  </div>
+</div>
+ </div>
+      <div class="" style="position:relative;width:80%;height:100%;top:5%;margin:0 auto;">
+          <div class="" style="float:left;width:40%;height:100%;">
       <?php
 
       $codisco=$_GET['codisco'];
@@ -278,7 +296,7 @@
       }
       ?>
     </div>
-      <div style="float:right;border:solid black 1px;width:55%;height:100%;">
+      <div style="float:right;width:55%;height:100%;">
         <table>
           <?php
           $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
@@ -288,28 +306,40 @@
                exit();
            }
 
-            $consulta="select * from DISCO D, AUTOR A WHERE D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO='".$_GET["codisco"]."';";
+            $consulta="select * from DISCO D, AUTOR A,DISCOGRAFICA DG WHERE D.COD_AUTOR=A.COD_AUTOR AND DG.COD_DISCOGRA=D.COD_DISCOGRA AND D.COD_DISCO='".$_GET["codisco"]."';";
             if($result=$connection->query($consulta)){
               while ($fila=$result->fetch_object()) {
                   echo '<tr>
-                          <td>NOMBRE: </td>
-                          <td>'.$fila->TITULO.'</td>
+                          <th>TITULO: </th>
+                          <td style="font-size:150%">'.$fila->TITULO.'</td>
                         </tr>
+
                         <tr>
-                          <td>PRECIO: </td>
-                          <td>'.$fila->PRECIO.'</td>
+                          <th>AUTOR: </th>
+                          <td>'.$fila->NOMBRE_A.'</td>
                         </tr>
-                        <tr>
-                          <td>AUTOR: </td>
-                          <td>'.$fila->NOMBRE_A.'€</td>
-                        </tr>';
+                        <th>GÉNERO: </th>
+                        <td>'.$fila->GENERO.'</td>
+                      </tr>
+                      <th>FECHA: </th>
+                      <td>'.$fila->FECHA.'</td>
+                    </tr>
+
+                        <th>DISCOGRÁFICA: </th>
+                        <td>'.$fila->NOMBRE.'</td>
+                      </tr>
+                      <tr>
+                        <th>PRECIO: </th>
+                        <td>'.$fila->PRECIO.'&nbsp€</td>
+                      </tr>';
+
 
                   if(isset($_SESSION["rol"])){
                         echo '<tr>
                                 <td>
                                     <form class="" action="#" method="post">
                                       <input type="hidden" name="codisco" value="'.$fila->COD_DISCO.'">
-                                      <input type="submit" name="añadircarrito" value="Añadir al carrito">
+                                      <input type="submit" class="btn btn-success" name="añadircarrito" value="Añadir al carrito">
                                     </form>
                                 </td>
                               </tr>';
@@ -358,6 +388,7 @@
 
   <br>
 </div>
+
 
     <?php include("../plantilla/footer.php");?>
     <div class="ir-arriba"><img src="../images/icon_up.PNG"></div>
