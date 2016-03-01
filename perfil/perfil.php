@@ -38,29 +38,29 @@
         $userlogin=$_POST["user"];
         $passlogin=$_POST["password"];
 
-    //CREATING THE CONNECTION
-    $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
-      //TESTING IF THE CONNECTION WAS RIGHT
-      if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-      //MAKING A SELECT QUERY
-      /* Consultas de selección que devuelven un conjunto de resultados */
+        //CREATING THE CONNECTION
+         $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+          //TESTING IF THE CONNECTION WAS RIGHT
+          if ($connection->connect_errno) {
+              printf("Conexión fallida %s\n", $mysqli->connect_error);
+              exit();
+          }
+          //MAKING A SELECT QUERY
+          /* Consultas de selección que devuelven un conjunto de resultados */
 
-        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."');";
+            $consulta="SELECT * FROM USUARIO where USERNAME='".$userlogin."'and PASSWORD=md5('".$passlogin."') and ESTADO='activo';";
 
-      if ($result = $connection->query($consulta)) {
-          if($result->num_rows===0){
+          if ($result = $connection->query($consulta)) {
+              if($result->num_rows===0){
 
-              ?>
-              <script type="text/javascript">
-                  $(document).ready( function() {
-                    $('#failedlogin').show();
-                    $('#failedlogin').delay(3000).fadeOut();
+                  ?>
+                  <script type="text/javascript">
+                      $(document).ready( function() {
+                        $('#failedlogin').show();
+                        $('#failedlogin').delay(3000).fadeOut();
 
-                  });
-            </script>
+                      });
+                </script>
 
               <?php
 

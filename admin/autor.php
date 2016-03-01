@@ -42,29 +42,29 @@
         $userlogin=$_POST["user"];
         $passlogin=$_POST["password"];
 
-    //CREATING THE CONNECTION
-     $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
-      //TESTING IF THE CONNECTION WAS RIGHT
-      if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-      //MAKING A SELECT QUERY
-      /* Consultas de selección que devuelven un conjunto de resultados */
+        //CREATING THE CONNECTION
+         $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+          //TESTING IF THE CONNECTION WAS RIGHT
+          if ($connection->connect_errno) {
+              printf("Conexión fallida %s\n", $mysqli->connect_error);
+              exit();
+          }
+          //MAKING A SELECT QUERY
+          /* Consultas de selección que devuelven un conjunto de resultados */
 
-        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."');";
+            $consulta="SELECT * FROM USUARIO where USERNAME='".$userlogin."'and PASSWORD=md5('".$passlogin."') and ESTADO='activo';";
 
-      if ($result = $connection->query($consulta)) {
-          if($result->num_rows===0){
+          if ($result = $connection->query($consulta)) {
+              if($result->num_rows===0){
 
-              ?>
-              <script type="text/javascript">
-                  $(document).ready( function() {
-                    $('#failedlogin').show();
-                    $('#failedlogin').delay(3000).fadeOut();
+                  ?>
+                  <script type="text/javascript">
+                      $(document).ready( function() {
+                        $('#failedlogin').show();
+                        $('#failedlogin').delay(3000).fadeOut();
 
-                  });
-            </script>
+                      });
+                </script>
 
               <?php
 
@@ -231,7 +231,7 @@
        <table style="margin-top:2%;" class="table table-hover table-bordered ">
        <tr style="font-weight:bold;text-align:center;background-color:#F2F2F2">
 
-          <td>CÓDIGO</td>
+
            <td>NOMBRE</td>
            <td>FECHA DE NACIMIENTO</td>
            <td colspan="2">OPERACIONES</td>
@@ -244,7 +244,7 @@
           while($obj = $result->fetch_object()) {
               //PINTAR CADA FILA
               echo "<tr>";
-              echo "<td>".$obj->COD_AUTOR."</td>";
+              
               echo "<td>".$obj->NOMBRE_A."</td>";
               echo "<td>".$obj->FECHA_NAC."</td>";
 

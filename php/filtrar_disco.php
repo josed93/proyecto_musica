@@ -19,7 +19,8 @@
 
        echo '<table style="margin-top:2%;" class="table table-hover table-bordered table-responsive ">
        <tr style="font-weight:bold;text-align:center">
-
+       
+          <td>CARÁTULA</td>
            <td>TÍTULO</td>
            <td>AUTOR</td>
            <td>PRECIO</td>
@@ -33,7 +34,7 @@
           while($obj = $result->fetch_object()) {
               //PINTAR CADA FILA
               echo "<tr>";
-
+              echo "<td style='text-align:center'><img src='../images/caratulas/".$obj->CARATULA."' style='width:60px;height:60px' alt='' /></td>";
               echo "<td>".$obj->TITULO."</td>";
               echo "<td>".$obj->NOMBRE_A."</td>";
               echo "<td>".$obj->PRECIO."&nbsp€</td>";

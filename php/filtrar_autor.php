@@ -19,7 +19,7 @@
        echo '<table style="margin-top:2%;" class="table table-hover table-bordered ">
        <tr style="font-weight:bold;text-align:center;background-color:#F2F2F2">
 
-          <td>CÓDIGO</td>
+          
            <td>NOMBRE</td>
            <td>FECHA DE NACIMIENTO</td>
            <td colspan="2">OPERACIONES</td>
@@ -32,7 +32,7 @@
 while($obj = $result->fetch_object()) {
               //PINTAR CADA FILA
               echo "<tr>";
-              echo "<td>".$obj->COD_AUTOR."</td>";
+
               echo "<td>".$obj->NOMBRE_A."</td>";
               echo "<td>".$obj->FECHA_NAC."</td>";
 

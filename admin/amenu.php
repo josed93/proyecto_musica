@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-            
+
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul >
@@ -19,7 +19,7 @@
 					</div>
 
 					<div class="contenedor_dos">
-                        <p class="texto_uno"><img src="../images/iconos_menu/usuarios.png">USUARIOS</p>					
+                        <p class="texto_uno"><img src="../images/iconos_menu/usuarios.png">USUARIOS</p>
                     </div>
 
 				</div></a>
@@ -41,7 +41,7 @@
 
                     </div></a>
 			</li>
-			
+
 			<li>
 				<a href="../admin/autor.php"><div class="contenedor_general">
 
@@ -69,7 +69,7 @@
                     </div></a>
 			</li>
 			<li>
-				<a href="../admin/pedidos.php"><div class="contenedor_general">
+				<a href="../tienda/ver_pedidosadmin.php"><div class="contenedor_general">
 
 					<div class="contenedor_uno">
 						<p class="texto_uno"><img src="../images/iconos_menu/pedido.png">PEDIDOS</p>
@@ -107,13 +107,13 @@
 					</div>
 
 					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/contac_black.PNG">CONTACTO</p>
+                        <p class="texto_dos"><img src="../images/iconos_menu/contac_black.png">CONTACTO</p>
 					</div>
 
                 </div></a>
 			</li>
-			
-			
+
+
 
 		</ul>
        </div>
@@ -121,5 +121,5 @@
 
 
 
-		
+
 	</nav>

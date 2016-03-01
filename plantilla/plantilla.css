@@ -125,7 +125,7 @@ body{
     height: 30px;
     list-style:none;
     margin-top: 20px;
-    margin-left: 50px;
+    /*margin-left: 50px;*/
     background-color: #FFBF00;
     border-radius: 2px;
     line-height: 30px;

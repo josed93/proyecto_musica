@@ -21,7 +21,51 @@
 <title>Inicio</title>
 <?php include("../plantilla/header.php");?>
 <!--<link rel="stylesheet" href="estilo_reg.css">-->
+
+
 <body>
+  <style>
+    #carrusel img{
+      width: 30%;
+      height: 30%;
+      margin-left: 10%;
+
+
+    }
+      #carrusel {
+        background-color: #E6E6E6;
+
+      }
+      #carrusel h3 {
+        color: #0080FF;
+
+      }
+      #carrusel h2 {
+        color: red;
+
+      }
+      #carrusel p{
+        color: black;
+
+      }
+
+      .carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+}
+
+.carousel-indicators .active {
+  background-color: #444;
+}
+
+
+  </style>
+
+
+
+
+
+
 
     <div id="top" class="container">
         <div id="logo">
@@ -159,7 +203,31 @@
             </li>
           </ul>
         </div>
-
+        <div id="carrito" class="rotateinfinite">
+                        <a href="#"><img src="../images/carrito.PNG" style="float:left;width:40px;height:40px"/><p style="position:relative;float:left;top:20px;left:-23px;">
+                          <?php
+                          //CREATING THE CONNECTION
+                           $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+                            //TESTING IF THE CONNECTION WAS RIGHT
+                            if ($connection->connect_errno) {
+                                printf("Conexión fallida %s\n", $mysqli->connect_error);
+                                exit();
+                            }
+                          $user=$_SESSION["user"];
+                          $consulta = "SELECT SUM(CESTA.CANTIDAD) AS total FROM USUARIO, CESTA WHERE USUARIO.COD_USU = CESTA.COD_USU AND USUARIO.USERNAME = '".$user."';";
+                          if($result = $connection->query($consulta)){
+                                $total=0;
+                                if($result->num_rows==0){
+                                }else{
+                                    while($fila=$result->fetch_object()){
+                                        $total=$total+$fila->total;
+                                    }
+                                }
+                                echo " ($total)";
+                          }
+                          ?>
+                        </p></a>
+                </div>
 
 
     <?php
@@ -217,10 +285,7 @@
 
 
 
-        <div id="carrito" class="rotateinfinite">
-                <a href="#"><img src="../images/carrito.PNG"></a>
 
-        </div>
 
 
 
@@ -233,54 +298,70 @@
 
     <div id="center">
        <div class="jumbotron">
-  <div class="container text-center">
-    <h1>My Portfolio</h1>
-    <p>Some text that represents "Me"...</p>
-  </div>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 80%; margin: 0 auto">
+
+
+  <?php
+  $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+
+        if ($connection->connect_errno) {
+           printf("Conexión fallida %s\n", $mysqli->connect_error);
+           exit();
+       }
+       $result = $connection->query("SELECT D.*,A.NOMBRE_A FROM DISCO D, AUTOR A WHERE D.COD_AUTOR=A.COD_AUTOR");
+?>
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+    <li data-target="#myCarousel" data-slide-to="4"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox" id="carrusel">
+  <?php
+  $cont=0;
+
+  while($obj=$result->fetch_object()){
+    if($cont==0){
+      $cont=1;
+      echo '<div class="item active">
+          <img src="../images/caratulas/'.$obj->CARATULA.'" alt="Chania">
+          <div class="carousel-caption">
+            <a href="../tienda/detalles_disco.php?codisco='.$obj->COD_DISCO.'"><h3>'.$obj->NOMBRE_A.'</h3></a>
+            <p>'.$obj->TITULO.'</p>
+            <h2>'.$obj->PRECIO.' €</h2>
+          </div>
+        </div>';
+
+    }else{
+
+        echo '<div class="item">
+          <img src="../images/caratulas/'.$obj->CARATULA.'" alt="Chania">
+          <div class="carousel-caption">
+          <a href="../tienda/detalles_disco.php?codisco='.$obj->COD_DISCO.'"><h3>'.$obj->NOMBRE_A.'</h3></a>
+          <p>'.$obj->TITULO.'</p>
+          <h2>'.$obj->PRECIO.' €</h2>
+          </div>
+        </div>';
+
+    }
+
+  }
+  ?>
+
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
-
-<div class="container-fluid bg-3 text-center">
-  <h3>Some of my Work</h3><br>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br>
-
-<div class="container-fluid bg-3 text-center">
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="http://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br><br>
+</div>
+</div>
 
     </div>
     <?php include("../plantilla/footer.php");?>

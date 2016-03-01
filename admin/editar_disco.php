@@ -42,29 +42,29 @@
         $userlogin=$_POST["user"];
         $passlogin=$_POST["password"];
 
-    //CREATING THE CONNECTION
-   $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
-      //TESTING IF THE CONNECTION WAS RIGHT
-      if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-      //MAKING A SELECT QUERY
-      /* Consultas de selección que devuelven un conjunto de resultados */
+        //CREATING THE CONNECTION
+         $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+          //TESTING IF THE CONNECTION WAS RIGHT
+          if ($connection->connect_errno) {
+              printf("Conexión fallida %s\n", $mysqli->connect_error);
+              exit();
+          }
+          //MAKING A SELECT QUERY
+          /* Consultas de selección que devuelven un conjunto de resultados */
 
-        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."');";
+            $consulta="SELECT * FROM USUARIO where USERNAME='".$userlogin."'and PASSWORD=md5('".$passlogin."') and ESTADO='activo';";
 
-      if ($result = $connection->query($consulta)) {
-          if($result->num_rows===0){
+          if ($result = $connection->query($consulta)) {
+              if($result->num_rows===0){
 
-              ?>
-              <script type="text/javascript">
-                  $(document).ready( function() {
-                    $('#failedlogin').show();
-                    $('#failedlogin').delay(3000).fadeOut();
+                  ?>
+                  <script type="text/javascript">
+                      $(document).ready( function() {
+                        $('#failedlogin').show();
+                        $('#failedlogin').delay(3000).fadeOut();
 
-                  });
-            </script>
+                      });
+                </script>
 
               <?php
 
@@ -268,6 +268,7 @@
             $fecha=$obj->FECHA;
             $caratula=$obj->CARATULA;
             $precio=$obj->PRECIO;
+            $cantidad=$obj->CANTIDAD;
             $cod_discogra=$obj->COD_DISCOGRA;
             $nom_discogra=$obj->NOMBRE;
             $cod_autor=$obj->COD_AUTOR;
@@ -346,6 +347,12 @@
 
              </div>
              <div class="form-group">
+                 <label>Precio</label>
+
+                   <input type="number" class="form-control" name="cantidad" value="'.$cantidad.'" step="any">
+
+              </div>
+             <div class="form-group">
                 <label>Discográfica:</label>
   <select name="nombrediscografica" class="form-control" id="sel1">';
  $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
@@ -392,6 +399,7 @@
             $fecha2=$_POST['fecha'];
             $caratula2=$_POST['caratula'];
             $precio2=$_POST['precio'];
+            $cantidad2=$_POST['cantidad'];
             $nombreautor=$_POST['nombreautor'];
             $nombrediscografica=$_POST['nombrediscografica'];
 
@@ -404,7 +412,7 @@
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-        $result2 = $connection2->query("UPDATE DISCO D,DISCOGRAFICA DF, AUTOR A SET D.TITULO='".$titulo2."',D.GENERO='".$genero2."',D.FECHA='".$fecha2."',D.CARATULA='".$caratula2."',D.PRECIO='".$precio2."',D.COD_DISCOGRA='".$nombrediscografica."',D.COD_AUTOR='".$nombreautor."' WHERE D.COD_DISCOGRA=DF.COD_DISCOGRA AND D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO= '".$codisco."'");
+        $result2 = $connection2->query("UPDATE DISCO D,DISCOGRAFICA DF, AUTOR A SET D.TITULO='".$titulo2."',D.GENERO='".$genero2."',D.FECHA='".$fecha2."',D.CARATULA='".$caratula2."',D.PRECIO='".$precio2."',D.CANTIDAD='".$cantidad2."',D.COD_DISCOGRA='".$nombrediscografica."',D.COD_AUTOR='".$nombreautor."' WHERE D.COD_DISCOGRA=DF.COD_DISCOGRA AND D.COD_AUTOR=A.COD_AUTOR AND D.COD_DISCO= '".$codisco."'");
 
             unset($connection2);
 

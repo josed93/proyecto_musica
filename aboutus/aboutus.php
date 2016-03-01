@@ -1,217 +1,297 @@
 <?php
-     session_start();
+  include_once("../plantilla/db_configuration.php");
 ?>
+<?php
+    session_start();
+    ob_start();
+
+
+?>
+<?php
+  //include_once("./db_configuration.php");
+?>
+
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Nosotros</title>
-    <link rel="stylesheet" href="aboutus.css">
-    <script type="text/javascript" src="../jquery/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="aboutus.js"></script>
-    <script src=""></script>
-</head>
+<title>Sobre nosotros</title>
+<?php include("../plantilla/header.php");?>
+<!--<link rel="stylesheet" href="estilo_reg.css">-->
+
 
 <body>
-    
-    <div id="top">
+
+
+
+
+    <div id="top" class="container">
         <div id="logo">
             <a href="../inicio/inicio.php"><img src="../images/prueba.png"></a>
-            
+
         </div>
         <div id="logo2">
             <a href="../inicio/inicio.php"><img src="../images/logo2.PNG"></a>
-            
+
         </div>
-        <div id="find">
-            <form id="searchform">
+        <?php include("../plantilla/searchnbar.php");?>
+       <?php
+    if(isset($_POST["user"])){
 
-                 <input type="text" placeholder="Buscar cancion,interprete..." required>
+        $userlogin=$_POST["user"];
+        $passlogin=$_POST["password"];
 
-                 <button type="submit">Buscar</button>
+    //CREATING THE CONNECTION
+     $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+      //TESTING IF THE CONNECTION WAS RIGHT
+      if ($connection->connect_errno) {
+          printf("Conexión fallida %s\n", $mysqli->connect_error);
+          exit();
+      }
+      //MAKING A SELECT QUERY
+      /* Consultas de selección que devuelven un conjunto de resultados */
 
-             </form>
+        $consulta="SELECT * FROM USUARIO where USERNAME='".$userlogin."'and PASSWORD=md5('".$passlogin."') and ESTADO='activo';";
 
-            
-            
+      if ($result = $connection->query($consulta)) {
+          if($result->num_rows===0){
+
+              ?>
+              <script type="text/javascript">
+                  $(document).ready( function() {
+                    $('#failedlogin').show();
+                    $('#failedlogin').delay(3000).fadeOut();
+
+                  });
+            </script>
+
+              <?php
+
+
+          }else{
+
+           while($obj = $result->fetch_object()) {
+                $rol=$obj->ROL;
+                $estado=$obj->ESTADO;
+
+
+                $_SESSION["user"]=$userlogin;
+                $_SESSION["rol"]=$rol;
+                $_SESSION["estado"]=$estado;
+
+
+                  }
+
+           /* while($obj = $result->fetch_object()) {
+                  $rol=$obj->ROL;
+              if($_POST["alargar_sesion"] == true){
+                    $_SESSION["user"]=$userlogin;
+                    $_SESSION["rol"]=$rol;
+                    setcookie("PHPSESSID",$userlogin,time() +3600,"/","","",TRUE);
+
+              }
+               else{
+                   $_SESSION["user"]=$userlogin;
+                    $_SESSION["rol"]=$rol;
+
+
+               }
+            }*/
+
+
+
+
+               if ($rol == "admin"){
+                   header("Location:../admin/ausuarios.php");
+               }
+               else{
+                    header("Location:../inicio/inicio.php");
+               }
+
+
+            }
+
+
+
+
+
+      }else{
+        ?>
+              <script type="text/javascript">
+                  $(document).ready( function() {
+                    $('#novalido').show();
+                    $('#novalido').delay(3000).fadeOut();
+
+                  });
+            </script>
+
+              <?php
+        }
+    }
+
+
+
+    ?>
+    <?php
+
+    if(isset($_SESSION["user"])){
+    ?>
+
+        <div>
+          <ul id="ent" class="navbar-left">
+            <li class="dropdown">
+              <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $_SESSION["user"]?></b> <span class="caret"></span></a>
+                <ul id="login-dp2" class="dropdown-menu" style="width:100px;">
+                    <li>
+                         <div class="row">
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li id="uno"><a href="../perfil/perfil.php"><span class="glyphicon glyphicon-user"></span>Ver perfil</a></li>
+                                        <li id="dos"><a href="../plantilla/logout.php"><span class="glyphicon glyphicon-log-in"></span>Cerrar sesión</a></li>
+
+                                    </ul>
+
+
+
+                                </div>
+
+                         </div>
+                    </li>
+                </ul>
+            </li>
+          </ul>
         </div>
-       <div id="loginContainer">
-                <a href="#" id="loginButton"><span>Entrar</span><em></em></a>
-                <div style="clear:both"></div>
-                <div id="loginBox">                
-                    <form id="loginForm">
-                        <fieldset id="body">
-                            <fieldset>
-                                <label for="user">Usuario</label>
-                                <input type="text" name="user" id="user" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="password">Contraseña</label>
-                                <input type="password" name="password" id="password" />
-                            </fieldset>
-                            <input type="submit" id="login" value="Entrar" />
-                            <label for="checkbox"><input type="checkbox" id="checkbox" />Recordarme</label>
-                        </fieldset>
-                        <span><a href="#">¿Olvidaste tu contraseña?</a></span>
-                    </form>
-                </div>
-            </div>
-            <div id="reg">
-               <a href="../registro/registro.php" id="regbutton"><span><img src="../images/iconos_menu/reg.PNG">Registrarse</span><em></em></a>
-               
-                
-                
-                
-            </div>
 
-         
-          
-           
+
+
+    <?php
+    }
+    else{
+    ?>
+        <div>
+          <ul id="ent" class="navbar-left">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Entrar</b> <span class="caret"></span></a>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li>
+                         <div class="row">
+                                <div class="col-md-12">
+
+
+                                        <form class="form" role="form" method="post" action="" accept-charset="UTF-8" id="login-nav">
+                                            <div class="form-group">
+                                                 <label class="sr-only" for="exampleInputUsername2">Usuario</label>
+                                                 <input type="text" class="form-control" id="name" name="user" placeholder="Usuario" required>
+                                            </div>
+                                            <div class="form-group">
+                                                 <label class="sr-only" for="exampleInputPassword2">Contraseña</label>
+                                                 <input type="password" class="form-control" id="pass" name="password" placeholder="Contraseña" required>
+                                                 <div class="help-block text-right"><a href="">Olvidaste la contraseña ?</a></div>
+                                            </div>
+                                            <div class="form-group">
+                                                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                                            </div>
+                                            <div class="checkbox">
+                                                 <label>
+                                                 <input type="checkbox" name="alargar_sesion"> Mantener en sesión
+                                                 </label>
+                                            </div>
+                                     </form>
+                                </div>
+
+                         </div>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+        <div id="reg">
+               <a href="../registro/registro.php" id="regbutton"><span><img src="../images/iconos_menu/reg.PNG"><b>Registrarse</b></span><em></em></a>
+        </div>
+
+
+    <?php
+    }
+
+
+?>
+
+
+
+
         <div id="carrito" class="rotateinfinite">
                 <a href="#"><img src="../images/carrito.PNG"></a>
-                
+
         </div>
-            
-            
-        
-        
-        
-        
+
+
+
+
+
+
     </div>
-    <nav id="top_menu">
+    <!-- EN FUNCIÓN DEL ROL QUE CAMBIE EL MENÚ-->
+     <?php if(isset($_SESSION["user"])){
+      if($_SESSION["rol"] == "admin"){
+          include("../admin/amenu.php");
+      }
+      else{
+          include("../plantilla/menu.php");
+      }
 
-		<ul>
-			<li>
-				<a href="../inicio/inicio.php"><div class="contenedor_general">
-
-					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/home_white.PNG">INICIO</p>
-					</div>
-
-					<div class="contenedor_dos">
-                        <p class="texto_uno"><img src="../images/iconos_menu/home_black.PNG">INICIO</p>					
-                    </div>
-
-				</div></a>
-			</li>
-
-
-
-
-			<li>
-				<a href="../tienda/tienda.php"><div class="contenedor_general">
-
-					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/tienda_white.PNG">TIENDA</p>
-					</div>
-
-					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/tienda_black.PNG">TIENDA</p>
-					</div>
-
-                    </div></a>
-			</li>
-			<li>
-				<a href="../catalogo/catalogo.php"><div class="contenedor_general">
-
-					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/catalogo_white.png">CATÁLOGO</p>
-					</div>
-
-					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/catalogo_black.PNG">CATÁLOGO</p>
-					</div>
-
-                    </div></a>
-			</li>
-
-
-
-			<li>
-				<a href="../aboutus/aboutus.php"><div id ="excep" class="contenedor_general">
-
-					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/aboutus_white.png">SOBRE NOSOTROS</p>
-					</div>
-
-					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/aboutus_black.PNG">SOBRE NOSOTROS</p>
-					</div>
-
-                </div></a>
-			</li>
-
-
-			<li>
-				<a href="../contacto/contacto.php"><div class="contenedor_general">
-
-					<div class="contenedor_uno">
-						<p class="texto_uno"><img src="../images/iconos_menu/contact_white.png">CONTACTO</p>
-					</div>
-
-					<div class="contenedor_dos">
-                        <p class="texto_dos"><img src="../images/iconos_menu/contac_black.PNG">CONTACTO</p>
-					</div>
-
-                </div></a>
-			</li>
-			
-			
-
-		</ul>
-
-
-		
-	</nav>
+  }else {
+    include("../plantilla/menu.php");
+  }
+    ?>
+        <?php include("../plantilla/alerts.php");?>
 
     <div id="center">
-        
-    </div>     
-    <div id="foot">
-        <div id="fizq" class="efooter">
-           
-           
-           
-           <h3>SOBRE NOSOTROS</h3>
-           <p>Página Web desarrollada por José Daniel de las Heras Díaz para el proyecto de Implantación de aplicaciones web de ASIR Segundo Año.</p>
-           <p>Delasheras-Music va dedicada principalmente a la venta de discos de música de una gran multitud de géneros.</p>
-           <br>
-            <p id="copy">Delasheras-Music. Copyright © 2015. All right reserved.<img src="../images/logo2.png"></p>
-            
-            
+      <div class="container">
+        <div style="margin: 0 auto" >
+          <img src="../images/patio.jpg" style="margin: 0 auto;width:100%;padding-bottom:2%" >
+
         </div>
-        <div id="fcenter" class="efooter">
-            <h3>REDES SOCIALES</h3>
-            <div><a href="https://www.facebook.com/josedaniel.delasheras" target="_blank"><img src="../images/iconos_footer/icon_facebook.PNG"><p>Facebook</p></a></div>
-            <div><a href="https://twitter.com/zombiejd93" target="_blank"><img src="../images/iconos_footer/icon_twitter.PNG"><p>Twitter</p></a></div>
-            <div><a href="https://plus.google.com/+sangetsubankai/posts" target="_blank"><img src="../images/iconos_footer/icon_google.PNG"><p>Google+</p></a></div>
-            <div><a href="https://www.youtube.com/channel/UCG36-wXs5lBZMmWXUjyouZw" target="_blank"><img src="../images/iconos_footer/icon_you.PNG"><p>Youtube</p></a></div>
-            <div><a href="https://github.com/josed93/IMPLA" target="_blank"><img src="../images/iconos_footer/icon_github.PNG"><p>Github</p></a></div>
-            
-            
+        <div style="float:right">
+            <img src="../images/logo2.PNG">
         </div>
-        <div id="fder" class="efooter">
-            <h3>CONTACTO</h3>
-            <div id="pos"><img src="../images/iconos_footer/icon_position.PNG"><p>Posición</p></div>
-            <div id="lugar"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="300" height="143" src="https://maps.google.com/maps?hl=en&q=IES Triana&ie=UTF8&t=m&z=18&iwloc=B&output=embed"><div><small><a href="http://embedgooglemaps.com">embedgooglemaps.com</a></small></div><div><small><a href="http://www.bmwpedia.net/">BMW cars</a></small></div></iframe></div>
-            <img src="../images/iconos_footer/icon_email.PNG"><p>jose_d.93@hotmail.com</p>
-            <img src="../images/iconos_footer/icon_tel.PNG"><p>+34 655599239</p>
-            
-            
+        <div style="width:45%;font-style:italic;font-size:120%;font-family:tahoma;clear: left;">
+      <p>Página Web desarrollada por José Daniel de las Heras Díaz para el proyecto de Implantación de aplicaciones web de ASIR Segundo Año.</p>
+      <p>Delasheras-Music va dedicada principalmente a la venta de discos de música de una gran multitud de géneros.</p>
+      <br>
+      </div>
+
+      <div>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              VER UBICACIÓN DEL SITIO
+            </a>
+          </h4>
         </div>
-        
-        
-        
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1585.1599987168577!2d-6.007117!3d37.382264!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfb6bb621dc08a753!2sInstituto+de+Educaci%C3%B3n+Secundaria+Ies+Triana!5e0!3m2!1sen!2sus!4v1456792245727" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>          </div>
+        </div>
+      </div>
+
+
     </div>
+
+     </div>
+     <p id="copy">Delasheras-Music. Copyright © 2015. All right reserved.</p>
+     </div>
+    </div>
+    <?php include("../plantilla/footer.php");?>
     <div class="ir-arriba"><img src="../images/icon_up.PNG"></div>
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 </body>
 </html>
+<?php
+ob_end_flush();
+?>

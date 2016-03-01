@@ -42,29 +42,29 @@
         $userlogin=$_POST["user"];
         $passlogin=$_POST["password"];
 
-    //CREATING THE CONNECTION
-     $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
-      //TESTING IF THE CONNECTION WAS RIGHT
-      if ($connection->connect_errno) {
-          printf("Conexión fallida %s\n", $mysqli->connect_error);
-          exit();
-      }
-      //MAKING A SELECT QUERY
-      /* Consultas de selección que devuelven un conjunto de resultados */
+        //CREATING THE CONNECTION
+         $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
+          //TESTING IF THE CONNECTION WAS RIGHT
+          if ($connection->connect_errno) {
+              printf("Conexión fallida %s\n", $mysqli->connect_error);
+              exit();
+          }
+          //MAKING A SELECT QUERY
+          /* Consultas de selección que devuelven un conjunto de resultados */
 
-        $consulta="SELECT * FROM usuario where username='".$userlogin."'and password=md5('".$passlogin."');";
+            $consulta="SELECT * FROM USUARIO where USERNAME='".$userlogin."'and PASSWORD=md5('".$passlogin."') and ESTADO='activo';";
 
-      if ($result = $connection->query($consulta)) {
-          if($result->num_rows===0){
+          if ($result = $connection->query($consulta)) {
+              if($result->num_rows===0){
 
-              ?>
-              <script type="text/javascript">
-                  $(document).ready( function() {
-                    $('#failedlogin').show();
-                    $('#failedlogin').delay(3000).fadeOut();
+                  ?>
+                  <script type="text/javascript">
+                      $(document).ready( function() {
+                        $('#failedlogin').show();
+                        $('#failedlogin').delay(3000).fadeOut();
 
-                  });
-            </script>
+                      });
+                </script>
 
               <?php
 
@@ -302,8 +302,15 @@
                   <input type="date" class="form-control" name="fecha" >
 
              </div>
+             <div class="form-group">
+                 <label>Cantidad</label>
+
+                   <input type="number" class="form-control" name="cantidad" step="any">
+
+              </div>
 
         </div>
+
         <div id="derecha" style="margin-left:5%;width:25%;height:auto;float:left">
 
               <div class="form-group">
@@ -330,9 +337,9 @@
               </div>
               <div>
 
-                  <center>
+                      <center>
                           <img src="" style="border:solid red 1px; width:150px; height:150px" id="caratulas"/>
-                          </center>
+                      </center>
 
 
 
@@ -389,6 +396,7 @@
             $genero2=$_POST['genero'];
             $fecha2=$_POST['fecha'];
             $precio2=$_POST['precio'];
+            $cantidad2=$_POST['cantidad'];
             $nombreautor=$_POST['nombreautor'];
             $nombrediscografica=$_POST['nombrediscografica'];
             $ruta="";
@@ -434,7 +442,7 @@
           printf("Conexión fallida %s\n", $mysqli->connect_error);
           exit();
       }
-        $result2 = $connection2->query("INSERT INTO DISCO (TITULO,GENERO,FECHA,CARATULA,PRECIO,COD_DISCOGRA,COD_AUTOR) VALUES ('$titulo2','$genero2','$fecha2','$ruta','$precio2','$nombrediscografica','$nombreautor')");
+        $result2 = $connection2->query("INSERT INTO DISCO (TITULO,GENERO,FECHA,CARATULA,PRECIO,CANTIDAD,COD_DISCOGRA,COD_AUTOR) VALUES ('$titulo2','$genero2','$fecha2','$ruta','$precio2','$cantidad2','$nombrediscografica','$nombreautor')");
 
 
 

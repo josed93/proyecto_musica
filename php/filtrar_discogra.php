@@ -15,7 +15,7 @@
 
        echo '<table style="margin-top:2%;" class="table table-hover table-bordered table-responsive ">
        <tr style="font-weight:bold;text-align:center">
-          <td>CÓDIGO</td>
+          
            <td>NOMBRE</td>
            <td>FUNDACIÓN</td>
            <td>PÁGINA WEB</td>
@@ -29,7 +29,7 @@
           while($obj = $result->fetch_object()) {
               //PINTAR CADA FILA
               echo "<tr>";
-              echo "<td>".$obj->COD_DISCOGRA."</td>";
+
               echo "<td>".$obj->NOMBRE."</td>";
               echo "<td>".$obj->FUNDACION."</td>";
               echo "<td><a href='".$obj->PAGINA_WEB."' target='_blank'>".$obj->PAGINA_WEB."</a></td>";
